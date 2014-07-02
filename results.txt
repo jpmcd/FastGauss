@@ -1,0 +1,123 @@
+In the script Transform.py, I have constructed a Fast Gauss Transform computing potentials from N Gaussian sources to M targets. The code defines objects for source and target boxes which contain all information (including sources/targets, Taylor and Hermitian coefficients) for that box, and then gives the algorithm in the function FastGauss which is called in the 'main' portion for testing (underneath if __name__ == '__main__'). The algorithm follows that described in the Fast Gauss Transform paper from 1991 by Greengard and Strain. Below we give a printout for one run of Transform.py, increasing from 100 sources and targets to 6400 sources and targets to see the computational cost saved with the Fast Gauss transform in contrast with directly evaluating the potentials. The algorith is hard-coded for 2 dimensions, though only a few lines of code would need to be changed to make this a useful tool for higher dimensions.
+
+The tolerance that is given as an argument to the algorithm is used to compute box size, number of interacting boxes and the number of terms in the Taylor/Hermite expansions, but this does not translate to the final relative error being bounded by the tolerance. Nevertheless as the inputted tolerance shrinks so does the relative error. Other parameters that can be changed to get different features of the algorithm would be the box scaling size r. Note that in the printed run below all the potentials are computed by the fourth method of computing a Hermite expansion for the source boxes and then computing the Taylor expansion of that for each target box. Modifying parameters will allow it so that a combination of the other three methods described in the paper can be used as well.
+
+The code can be run by locating the folder containing the script and typing 'python Transform.py' into the console.
+
+
+In [54]: run Transform.py
+Computing potentials directly for N = 100
+Finished direct. Computing potentials using Fast Gauss Transform.
+r = 0.353553390593
+Nside = 2.0
+n = 9
+p = 6
+Relative Error = 9.0552355307e-06
+16 interactions total
+solved 0 interactions by 1: direct evaluation
+solved 0 interactions by 2: Taylor expansion
+solved 0 interactions by 3: Hermite expansion and evaluate
+solved 16 interactions by 4: Hermite then Taylor
+direct solve seconds: 0.03
+FG solve seconds: 0.02
+-----------------------------------------------------------------------------------------
+Computing potentials directly for N = 200
+Finished direct. Computing potentials using Fast Gauss Transform.
+r = 0.353553390593
+Nside = 2.0
+n = 9
+p = 6
+Relative Error = 1.00662202887e-05
+16 interactions total
+solved 0 interactions by 1: direct evaluation
+solved 0 interactions by 2: Taylor expansion
+solved 0 interactions by 3: Hermite expansion and evaluate
+solved 16 interactions by 4: Hermite then Taylor
+direct solve seconds: 0.08
+FG solve seconds: 0.03
+-----------------------------------------------------------------------------------------
+Computing potentials directly for N = 400
+Finished direct. Computing potentials using Fast Gauss Transform.
+r = 0.353553390593
+Nside = 2.0
+n = 9
+p = 6
+Relative Error = 9.30968833794e-06
+16 interactions total
+solved 0 interactions by 1: direct evaluation
+solved 0 interactions by 2: Taylor expansion
+solved 0 interactions by 3: Hermite expansion and evaluate
+solved 16 interactions by 4: Hermite then Taylor
+direct solve seconds: 0.35
+FG solve seconds: 0.04
+-----------------------------------------------------------------------------------------
+Computing potentials directly for N = 800
+Finished direct. Computing potentials using Fast Gauss Transform.
+r = 0.353553390593
+Nside = 2.0
+n = 9
+p = 6
+Relative Error = 9.24891442768e-06
+16 interactions total
+solved 0 interactions by 1: direct evaluation
+solved 0 interactions by 2: Taylor expansion
+solved 0 interactions by 3: Hermite expansion and evaluate
+solved 16 interactions by 4: Hermite then Taylor
+direct solve seconds: 1.38
+FG solve seconds: 0.07
+-----------------------------------------------------------------------------------------
+Computing potentials directly for N = 1600
+Finished direct. Computing potentials using Fast Gauss Transform.
+r = 0.353553390593
+Nside = 2.0
+n = 9
+p = 6
+Relative Error = 9.5911698471e-06
+16 interactions total
+solved 0 interactions by 1: direct evaluation
+solved 0 interactions by 2: Taylor expansion
+solved 0 interactions by 3: Hermite expansion and evaluate
+solved 16 interactions by 4: Hermite then Taylor
+direct solve seconds: 5.63
+FG solve seconds: 0.14
+-----------------------------------------------------------------------------------------
+Computing potentials directly for N = 3200
+Finished direct. Computing potentials using Fast Gauss Transform.
+r = 0.353553390593
+Nside = 2.0
+n = 9
+p = 6
+Relative Error = 9.5024779739e-06
+16 interactions total
+solved 0 interactions by 1: direct evaluation
+solved 0 interactions by 2: Taylor expansion
+solved 0 interactions by 3: Hermite expansion and evaluate
+solved 16 interactions by 4: Hermite then Taylor
+direct solve seconds: 22.65
+FG solve seconds: 0.25
+-----------------------------------------------------------------------------------------
+Computing potentials directly for N = 6400
+Finished direct. Computing potentials using Fast Gauss Transform.
+r = 0.353553390593
+Nside = 2.0
+n = 9
+p = 6
+Relative Error = 9.51156060377e-06
+16 interactions total
+solved 0 interactions by 1: direct evaluation
+solved 0 interactions by 2: Taylor expansion
+solved 0 interactions by 3: Hermite expansion and evaluate
+solved 16 interactions by 4: Hermite then Taylor
+direct solve seconds: 93.7
+FG solve seconds: 0.53
+-----------------------------------------------------------------------------------------
+On 2 dimensional grid, with delta = 1 and epsilon = 1e-08
+[N=M, Time(Direct), Time(FastGauss), Relative Error]
+[100, 0.029999999999972715, 0.020000000000038654, 9.0552355307044172e-06]
+[200, 0.079999999999984084, 0.029999999999972715, 1.0066220288650321e-05]
+[400, 0.35000000000002274, 0.040000000000020464, 9.3096883379449418e-06]
+[800, 1.3799999999999955, 0.069999999999993179, 9.2489144276803644e-06]
+[1600, 5.6299999999999955, 0.13999999999998636, 9.5911698470990488e-06]
+[3200, 22.650000000000034, 0.25, 9.5024779739007794e-06]
+[6400, 93.699999999999989, 0.53000000000002956, 9.5115606037749047e-06]
+
