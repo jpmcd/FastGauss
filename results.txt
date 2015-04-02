@@ -1,8 +1,31 @@
-In the script Transform.py, I have constructed a Fast Gauss Transform computing potentials from N Gaussian sources to M targets. The code defines objects for source and target boxes which contain all information (including sources/targets, Taylor and Hermitian coefficients) for that box, and then gives the algorithm in the function FastGauss which is called in the 'main' portion for testing (underneath if __name__ == '__main__'). The algorithm follows that described in the Fast Gauss Transform paper from 1991 by Greengard and Strain. Below we give a printout for one run of Transform.py, increasing from 100 sources and targets to 6400 sources and targets to see the computational cost saved with the Fast Gauss transform in contrast with directly evaluating the potentials. The algorith is hard-coded for 2 dimensions, though only a few lines of code would need to be changed to make this a useful tool for higher dimensions.
+In the script Transform.py, I have constructed a Fast Gauss Transform computing
+potentials from N Gaussian sources to M targets. The code defines objects for
+source and target boxes which contain all information (including
+sources/targets, Taylor and Hermitian coefficients) for that box, and then
+gives the algorithm in the function FastGauss which is called in the 'main'
+portion for testing (underneath if __name__ == '__main__'). The algorithm
+follows that described in the Fast Gauss Transform paper from 1991 by Greengard
+and Strain. Below we give a printout for one run of Transform.py, increasing
+from 100 sources and targets to 6400 sources and targets to see the
+computational cost saved with the Fast Gauss transform in contrast with
+directly evaluating the potentials. The algorith is hard-coded for 2
+dimensions, though only a few lines of code would need to be changed to make
+this a useful tool for higher dimensions.
 
-The tolerance that is given as an argument to the algorithm is used to compute box size, number of interacting boxes and the number of terms in the Taylor/Hermite expansions, but this does not translate to the final relative error being bounded by the tolerance. Nevertheless as the inputted tolerance shrinks so does the relative error. Other parameters that can be changed to get different features of the algorithm would be the box scaling size r. Note that in the printed run below all the potentials are computed by the fourth method of computing a Hermite expansion for the source boxes and then computing the Taylor expansion of that for each target box. Modifying parameters will allow it so that a combination of the other three methods described in the paper can be used as well.
+The tolerance that is given as an argument to the algorithm is used to compute
+box size, number of interacting boxes and the number of terms in the
+Taylor/Hermite expansions, but this does not translate to the final relative
+error being bounded by the tolerance. Nevertheless as the inputted tolerance
+shrinks so does the relative error. Other parameters that can be changed to get
+different features of the algorithm would be the box scaling size r. Note that
+in the printed run below all the potentials are computed by the fourth method
+of computing a Hermite expansion for the source boxes and then computing the
+Taylor expansion of that for each target box. Modifying parameters will allow
+it so that a combination of the other three methods described in the paper can
+be used as well.
 
-The code can be run by locating the folder containing the script and typing 'python Transform.py' into the console.
+The code can be run by locating the folder containing the script and typing
+'python Transform.py' into the console.
 
 
 In [54]: run Transform.py
